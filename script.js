@@ -107,14 +107,16 @@ class User {
 	}
 
 	renderCourses(){
-		return this.courses.map(course => `
+		return this.courses.map(course => {
+			`
 				<p class="user__courses--course ${this.role}">
 					${course.title}
 					<span class="${gradation[course.mark] || gradation[course.score]}">
 						${gradation[course.mark] || gradation[course.score]}
 					</span>
 				</p>
-			`).join('');
+			`
+		}).join('');
 	}
 
 	render(){
@@ -142,5 +144,32 @@ class User {
 				${coursesHTML}
 			</div>
 		`;
+	}
+}
+
+class Student extends User {
+	renderCourses(){
+		return this.courses.map(course => {
+			`
+				<p class="user__courses--course ${this.role}">
+					${course.title}
+					<span class="${gradation[course.mark]}">${gradation[course.mark]}</span>
+				</p>
+			`
+		}).join('');
+	}
+}
+
+class Admin extends User {
+	renderCourses(){
+		return this.courses.map(course => {
+			`
+				<div class="user__courses--course ${this.role}">
+					<p>Title: <b>${course.title}</b></p>
+					<p>Admin's score: <span class="${gradation[course.score]}">${gradation[course.score]}</span></p>
+					<p>Lector: <b>${course.lector}</b></p>
+				</div>
+			`
+		}).join('');
 	}
 }
