@@ -109,12 +109,14 @@ class User {
 	renderCourses(){
 		return this.courses.map(course => {
 			`
-				<p class="user__courses--course ${this.role}">
-					${course.title}
-					<span class="${gradation[course.mark] || gradation[course.score]}">
-						${gradation[course.mark] || gradation[course.score]}
-					</span>
-				</p>
+				<div class="user__courses">
+					<p class="user__courses--course ${this.role}">
+						${course.title}
+						<span class="${gradation[course.mark] || gradation[course.score]}">
+							${gradation[course.mark] || gradation[course.score]}
+						</span>
+					</p>
+				</div>
 			`
 		}).join('');
 	}
@@ -151,10 +153,12 @@ class Student extends User {
 	renderCourses(){
 		return this.courses.map(course => {
 			`
-				<p class="user__courses--course ${this.role}">
-					${course.title}
-					<span class="${gradation[course.mark]}">${gradation[course.mark]}</span>
-				</p>
+				<div class="user__courses">
+					<p class="user__courses--course ${this.role}">
+						${course.title}
+						<span class="${gradation[course.mark]}">${gradation[course.mark]}</span>
+					</p>
+				</div>
 			`
 		}).join('');
 	}
@@ -164,10 +168,28 @@ class Admin extends User {
 	renderCourses(){
 		return this.courses.map(course => {
 			`
-				<div class="user__courses--course ${this.role}">
-					<p>Title: <b>${course.title}</b></p>
-					<p>Admin's score: <span class="${gradation[course.score]}">${gradation[course.score]}</span></p>
-					<p>Lector: <b>${course.lector}</b></p>
+				<div class="user-courses admin--info">
+					<div class="user__courses--course ${this.role}">
+						<p>Title: <b>${course.title}</b></p>
+						<p>Admin's score: <span class="${gradation[course.score]}">${gradation[course.score]}</span></p>
+						<p>Lector: <b>${course.lector}</b></p>
+					</div>
+				</div>
+			`
+		}).join('');
+	}
+}
+
+class Lector extends User {
+	renderCourses(){
+		return this.courses.map(course => {
+			`
+				<div class="user-courses admin--info">
+					<div class="user__courses--course ${this.role}">
+						<p>Title: <b>${course.title}</b></p>
+						<p>Lector's score: <span class="${gradation[course.score]}">${gradation[course.score]}</span></p>
+						<p>Average student's score: <span class="${gradation[course.studentsScore]}">${gradation[course.studentsScore]}</span></p>
+					</div>
 				</div>
 			`
 		}).join('');
