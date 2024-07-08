@@ -72,6 +72,9 @@ body {
   min-width: 70px;
   justify-content: center;
 }
+.user__info--role img {
+  width: 25px;
+}
 .user__info--role p {
   margin: 0 0 0 5px;
   text-transform: capitalize;
@@ -100,14 +103,13 @@ body {
   border-radius: 4px;
 }
 
-.admin--info {
-  align-items: flex-start;
-}
-.admin--info .user__courses--course {
+.user__courses--course.admin,
+.user__courses--course.lector {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
 }
-.admin--info .user__courses--course p {
+.user__courses--course.admin p,
+.user__courses--course.lector p {
   margin: 0 0 5px 0;
 }/*# sourceMappingURL=styles.css.map */

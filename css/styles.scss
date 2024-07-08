@@ -76,6 +76,10 @@ body {
       min-width: 70px;
       justify-content: center;
 
+      img {
+        width: 25px;
+      }
+
       p {
         margin: 0 0 0 5px;
         text-transform: capitalize;
@@ -114,15 +118,13 @@ body {
   }
 }
 
-.admin--info {
+.user__courses--course.admin,
+.user__courses--course.lector {
+  // display: flex;
+  flex-direction: column;
   align-items: flex-start;
-
-  .user__courses--course {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    p {
-      margin: 0 0 5px 0;
-    }
+  justify-content: flex-start;
+  p {
+    margin: 0 0 5px 0;
   }
 }
