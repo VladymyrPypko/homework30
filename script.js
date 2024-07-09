@@ -5,6 +5,13 @@ const gradation = {
     100: "excellent"
 };
 
+function verifyGradation(markOrScore){
+    if(markOrScore < 21) return 20;
+    if(markOrScore < 56 && markOrScore > 20) return 55;
+    if(markOrScore < 86 && markOrScore > 55) return 85;
+    if(markOrScore <= 100 && markOrScore > 85) return 100;
+}
+
 const users = [
     {
         name: "Jack Smith",
@@ -109,7 +116,7 @@ class User {
     renderCourses() {
         return this.courses.map(course => {
             const markOrScore = course.mark !== undefined ? course.mark : course.score;
-            const gradationClass = gradation[markOrScore];
+            const gradationClass = gradation[verifyGradation(markOrScore)];
             return `
                 <p class="user__courses--course ${this.role}">
                     ${course.title}
@@ -150,7 +157,7 @@ class Student extends User {
         return this.courses.map(course => `
             <p class="user__courses--course ${this.role}">
                 ${course.title}
-                <span class="${gradation[course.mark]}">${gradation[course.mark]}</span>
+                <span class="${gradation[verifyGradation(course.mark)]}">${gradation[verifyGradation(course.mark)]}</span>
             </p>
         `).join('');
     }
@@ -161,7 +168,7 @@ class Admin extends User {
         return this.courses.map(course => `
             <div class="user__courses--course ${this.role}">
                 <p>Title: <b>${course.title}</b></p>
-                <p>Admin's score: <span class="${gradation[course.score]}">${gradation[course.score]}</span></p>
+                <p>Admin's score: <span class="${gradation[verifyGradation(course.score)]}">${gradation[verifyGradation(course.score)]}</span></p>
                 <p>Lector: <b>${course.lector}</b></p>
             </div>
         `).join('');
@@ -173,8 +180,8 @@ class Lector extends User {
         return this.courses.map(course => `
             <div class="user__courses--course ${this.role}">
                 <p>Title: <b>${course.title}</b></p>
-                <p>Lector's score: <span class="${gradation[course.score]}">${gradation[course.score]}</span></p>
-                <p>Average student's score: <span class="${gradation[course.studentsScore]}">${gradation[course.studentsScore]}</span></p>
+                <p>Lector's score: <span class="${gradation[verifyGradation(course.score)]}">${gradation[verifyGradation(course.score)]}</span></p>
+                <p>Average student's score: <span class="${gradation[verifyGradation(course.studentsScore)]}">${gradation[verifyGradation(course.studentsScore)]}</span></p>
             </div>
         `).join('');
     }
